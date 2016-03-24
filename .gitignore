@@ -12,3 +12,10 @@ demo2.gif
 tablet.png
 scrolling_demo.gif
 color_demo.gif
+
+# Android Studio
+*.iml
+.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+.gradle
+build/
