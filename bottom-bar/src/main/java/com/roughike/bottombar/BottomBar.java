@@ -1164,6 +1164,8 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
     }
 
     private void handleBadgeVisibility(int oldPosition, int newPosition) {
+        return;
+        /*
         if (mBadgeMap == null) {
             return;
         }
@@ -1186,7 +1188,7 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
             if (newBadge.getAutoHideOnSelection()) {
                 newBadge.hide();
             }
-        }
+        }*/
     }
 
     @Override
@@ -1243,7 +1245,7 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
             View bottomBarTab = View.inflate(mContext, layoutResource, null);
             ImageView icon = (ImageView) bottomBarTab.findViewById(R.id.bb_bottom_bar_icon);
 
-            icon.setImageDrawable(bottomBarItemBase.getIcon(mContext));
+            icon.setImageResource(bottomBarItemBase.getIconResource());
 
             if (!mIsTabletMode) {
                 TextView title = (TextView) bottomBarTab.findViewById(R.id.bb_bottom_bar_title);
@@ -1484,7 +1486,9 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
             return;
         }
 
-        float scale = mIsShiftingMode ? 0 : 0.86f;
+        // es changed - do not want scale
+        float scale = mIsShiftingMode ? 0 : 1f;
+        // float scale = mIsShiftingMode ? 0 : 0.86f;
         int iconPaddingTop = mIsShiftingMode ? mSixteenDp : mEightDp;
 
         if (animate) {
@@ -1715,5 +1719,38 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
                 }
             });
         }
+    }
+
+    public void updateTitleOfTab(int tabPosition, String title) {
+        if (this.mItemContainer.getChildCount() > tabPosition) {
+            ViewGroup view = (ViewGroup)this.mItemContainer.getChildAt(tabPosition);
+            TextView titleView = (TextView)view.findViewById(R.id.bb_bottom_bar_title);
+
+            if (titleView != null) {
+                titleView.setText(title);
+            }
+        }
+    }
+
+    public boolean hasBadgeForTabAt(int tabPosition) {
+        return (this.mBadgeMap != null && this.mBadgeMap.containsKey(tabPosition));
+    }
+
+    public void removeBadgeForTabAt(int tabPosition) {
+        if (mBadgeMap != null) {
+            Object tag = mBadgeMap.get(tabPosition);
+
+            if (tag != null) {
+                BottomBarBadge badge = (BottomBarBadge)mOuterContainer.findViewWithTag(tag);
+
+                if (badge != null) {
+                    badge.hide();
+                }
+            }
+        }
+    }
+
+    public void setCustomDarkBackgroundColor(int backgroundColor) {
+        this.mDarkBackgroundColor = backgroundColor;
     }
 }

@@ -47,3 +47,11 @@ screenshot_tablet.png
 scrolling_demo.gif
 demo_shifting.gif
 icons-howto.png
+
+# Android Studio
+*.iml
+.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+.gradle
+build/
+

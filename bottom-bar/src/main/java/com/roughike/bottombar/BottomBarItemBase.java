@@ -44,12 +44,17 @@ class BottomBarItemBase {
     protected String title;
     protected int color;
     
-    protected Drawable getIcon(Context context) {
-        if (this.iconResource != 0) {
-            return ContextCompat.getDrawable(context, this.iconResource);
-        } else {
-            return this.icon;
-        }
+//    protected Drawable getIcon(Context context) {
+//        if (this.iconResource != 0) {
+//            return ContextCompat.getDrawable(context, this.iconResource);
+//        } else {
+//            return this.icon;
+//        }
+//    }
+
+    // es changed
+    protected int getIconResource() {
+        return this.iconResource;
     }
 
     protected String getTitle(Context context) {
