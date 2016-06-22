@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
@@ -19,6 +20,7 @@ import android.view.animation.Interpolator;
  */
 public class BottomNavigationBehavior<V extends View> extends VerticalScrollingBehavior<V> {
     private static final Interpolator INTERPOLATOR = new LinearOutSlowInInterpolator();
+    private static final int MAX_DY_THRESHHOLD = 3;
     private final int mBottomNavHeight;
     private final int mDefaultOffset;
     private boolean isShy = false;
@@ -67,7 +69,11 @@ public class BottomNavigationBehavior<V extends View> extends VerticalScrollingB
 
     @Override
     public void onDirectionNestedPreScroll(CoordinatorLayout coordinatorLayout, V child, View target, int dx, int dy, int[] consumed, @ScrollDirection int scrollDirection) {
-        handleDirection(child, scrollDirection);
+        Log.v("BOTTOMBAR: ", String.format("dy: %d %d", dy, scrollDirection));
+
+        if (Math.abs(dy) > MAX_DY_THRESHHOLD) {
+            handleDirection(child, scrollDirection);
+        }
     }
 
     private void handleDirection(V child, int scrollDirection) {
