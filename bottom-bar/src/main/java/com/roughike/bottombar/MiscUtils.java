@@ -126,16 +126,18 @@ class MiscUtils {
     }
 
     protected static void resizePaddingTop(final View icon, int start, int end, long duration) {
-        ValueAnimator paddingAnimator = ValueAnimator.ofInt(start, end);
-        paddingAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                icon.setPadding(icon.getPaddingLeft(), (Integer) animation.getAnimatedValue(),
-                    icon.getPaddingRight(), icon.getPaddingBottom());
-            }
-        });
-        paddingAnimator.setDuration(duration);
-        paddingAnimator.start();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            ValueAnimator paddingAnimator = ValueAnimator.ofInt(start, end);
+            paddingAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    icon.setPadding(icon.getPaddingLeft(), (Integer) animation.getAnimatedValue(),
+                            icon.getPaddingRight(), icon.getPaddingBottom());
+                }
+            });
+            paddingAnimator.setDuration(duration);
+            paddingAnimator.start();
+        }
     }
 
     /**
