@@ -61,6 +61,12 @@ public class BottomNavigationBehavior<V extends View> extends VerticalScrollingB
         }
     }
 
+    public void ensureScrollingEnabled() {
+        if (!mScrollingEnabled) {
+            mScrollingEnabled = true;
+        }
+    }
+
     @Override
     public boolean onDependentViewChanged(CoordinatorLayout parent, V child, View dependency) {
         updateScrollingForSnackbar(dependency, false);
