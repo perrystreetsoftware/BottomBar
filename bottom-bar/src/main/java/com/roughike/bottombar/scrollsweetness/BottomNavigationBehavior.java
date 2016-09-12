@@ -114,6 +114,16 @@ public class BottomNavigationBehavior<V extends View> extends VerticalScrollingB
         }
     }
 
+    public boolean getHidden() {
+        return hidden;
+    }
+
+    public void ensureVisible(V child) {
+        if (hidden) {
+            hidden = false;
+            animateOffset(child, mDefaultOffset);
+        }
+    }
 
     public void setHidden(@NonNull  V view, boolean bottomLayoutHidden) {
         if (!bottomLayoutHidden && hidden) {
