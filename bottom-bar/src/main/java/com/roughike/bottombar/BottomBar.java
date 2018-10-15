@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.MenuRes;
 import android.support.annotation.Nullable;
@@ -1718,6 +1719,17 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
                     }
                 }
             });
+        }
+    }
+
+    public void updateIconOfTab(int tabPosition, @DrawableRes int iconId) {
+        if (this.mItemContainer.getChildCount() > tabPosition) {
+            ViewGroup view = (ViewGroup)this.mItemContainer.getChildAt(tabPosition);
+            ImageView iconView = (ImageView)view.findViewById(R.id.bb_bottom_bar_icon);
+
+            if (iconView != null) {
+                iconView.setImageResource(iconId);
+            }
         }
     }
 
