@@ -9,15 +9,16 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
-import android.support.annotation.MenuRes;
-import android.support.annotation.Nullable;
-import android.support.annotation.StyleRes;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorCompat;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.MenuRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -277,7 +278,7 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
      * @param fragmentItems     an array of {@link BottomBarFragment} objects.
      */
     @Deprecated
-    public void setFragmentItems(android.support.v4.app.FragmentManager fragmentManager, @IdRes int containerResource,
+    public void setFragmentItems(FragmentManager fragmentManager, @IdRes int containerResource,
                                  BottomBarFragment... fragmentItems) {
         if (fragmentItems.length > 0) {
             int index = 0;
@@ -1566,9 +1567,9 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
                 && mItems instanceof BottomBarFragment[]) {
             BottomBarFragment newFragment = ((BottomBarFragment) mItems[mCurrentTabPosition]);
 
-            if (mFragmentManager instanceof android.support.v4.app.FragmentManager
+            if (mFragmentManager instanceof FragmentManager
                     && newFragment.getSupportFragment() != null) {
-                ((android.support.v4.app.FragmentManager) mFragmentManager).beginTransaction()
+                ((FragmentManager) mFragmentManager).beginTransaction()
                         .replace(mFragmentContainer, newFragment.getSupportFragment())
                         .commit();
             } else if (mFragmentManager instanceof android.app.FragmentManager

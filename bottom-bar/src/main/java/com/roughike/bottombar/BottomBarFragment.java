@@ -18,14 +18,15 @@
 package com.roughike.bottombar;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
 
 @Deprecated
 public class BottomBarFragment extends BottomBarItemBase {
     private android.app.Fragment fragment;
-    private android.support.v4.app.Fragment supportFragment;
+    private Fragment supportFragment;
 
     /**
      * Creates a new Tab for the BottomBar.
@@ -82,7 +83,7 @@ public class BottomBarFragment extends BottomBarItemBase {
      * @param iconResource a resource for the Tab icon.
      * @param title title for the Tab.
      */
-    public BottomBarFragment(android.support.v4.app.Fragment fragment, @DrawableRes int iconResource, @NonNull String title) {
+    public BottomBarFragment(Fragment fragment, @DrawableRes int iconResource, @NonNull String title) {
         this.supportFragment = fragment;
         this.iconResource = iconResource;
         this.title = title;
@@ -94,7 +95,7 @@ public class BottomBarFragment extends BottomBarItemBase {
      * @param icon an icon for the Tab.
      * @param title title for the Tab.
      */
-    public BottomBarFragment(android.support.v4.app.Fragment fragment, Drawable icon, @NonNull String title) {
+    public BottomBarFragment(Fragment fragment, Drawable icon, @NonNull String title) {
         this.supportFragment = fragment;
         this.icon = icon;
         this.title = title;
@@ -106,7 +107,7 @@ public class BottomBarFragment extends BottomBarItemBase {
      * @param icon an icon for the Tab.
      * @param titleResource resource for the title.
      */
-    public BottomBarFragment(android.support.v4.app.Fragment fragment, Drawable icon, @StringRes int titleResource) {
+    public BottomBarFragment(Fragment fragment, Drawable icon, @StringRes int titleResource) {
         this.supportFragment = fragment;
         this.icon = icon;
         this.titleResource = titleResource;
@@ -118,7 +119,7 @@ public class BottomBarFragment extends BottomBarItemBase {
      * @param iconResource a resource for the Tab icon.
      * @param titleResource resource for the title.
      */
-    public BottomBarFragment(android.support.v4.app.Fragment fragment, @DrawableRes int iconResource, @StringRes int titleResource) {
+    public BottomBarFragment(Fragment fragment, @DrawableRes int iconResource, @StringRes int titleResource) {
         this.supportFragment = fragment;
         this.iconResource = iconResource;
         this.titleResource = titleResource;
@@ -128,7 +129,7 @@ public class BottomBarFragment extends BottomBarItemBase {
         return fragment;
     }
 
-    protected android.support.v4.app.Fragment getSupportFragment() {
+    protected Fragment getSupportFragment() {
         return supportFragment;
     }
 }
