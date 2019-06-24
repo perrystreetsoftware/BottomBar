@@ -1168,8 +1168,6 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
     }
 
     private void handleBadgeVisibility(int oldPosition, int newPosition) {
-        return;
-        /*
         if (mBadgeMap == null) {
             return;
         }
@@ -1192,7 +1190,7 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
             if (newBadge.getAutoHideOnSelection()) {
                 newBadge.hide();
             }
-        }*/
+        }
     }
 
     @Override
