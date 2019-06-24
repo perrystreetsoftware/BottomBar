@@ -9,16 +9,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IdRes;
-import androidx.annotation.MenuRes;
-import androidx.annotation.Nullable;
-import androidx.annotation.StyleRes;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.ViewPropertyAnimatorCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -35,6 +25,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.MenuRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorCompat;
+import androidx.fragment.app.FragmentManager;
 
 import com.roughike.bottombar.scrollsweetness.BottomNavigationBehavior;
 
@@ -634,6 +635,7 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
      * Set a custom color for an active tab when there's three
      * or less items.
      * <p/>
+     * PSS Change: the note below is not relevant anymore
      * NOTE: This value is ignored on mobile devices if you have more than
      * three items.
      *
@@ -1214,7 +1216,8 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
         int index = 0;
         int biggestWidth = 0;
 
-        mIsShiftingMode = mMaxFixedTabCount >= 0 && mMaxFixedTabCount < bottomBarItems.length;
+        // PSS change: hardcode shifting mode
+        mIsShiftingMode = true;
 
         if (!mIsDarkTheme && !mIgnoreNightMode
                 && MiscUtils.isNightMode(mContext)) {
@@ -1402,14 +1405,13 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
 
         int tabPosition = findItemPosition(tab);
 
-        if (!mIsShiftingMode || mIsTabletMode) {
-            int activeColor = mCustomActiveTabColor != 0 ?
-                    mCustomActiveTabColor : mPrimaryColor;
-            icon.setColorFilter(activeColor);
+        // PSS change - apply active color independent of shifting mode or tablet mode
+        int activeColor = mCustomActiveTabColor != 0 ?
+                mCustomActiveTabColor : mPrimaryColor;
+        icon.setColorFilter(activeColor);
 
-            if (title != null) {
-                title.setTextColor(activeColor);
-            }
+        if (title != null) {
+            title.setTextColor(activeColor);
         }
 
         if (mIsDarkTheme) {
@@ -1467,13 +1469,12 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
         ImageView icon = (ImageView) tab.findViewById(R.id.bb_bottom_bar_icon);
         TextView title = (TextView) tab.findViewById(R.id.bb_bottom_bar_title);
 
-        if (!mIsShiftingMode || mIsTabletMode) {
-            int inActiveColor = mIsDarkTheme ? mWhiteColor : mInActiveColor;
-            icon.setColorFilter(inActiveColor);
+        // PSS change - apply active color independent of shifting mode or tablet mode
+        int inActiveColor = mIsDarkTheme ? mWhiteColor : mInActiveColor;
+        icon.setColorFilter(inActiveColor);
 
-            if (title != null) {
-                title.setTextColor(inActiveColor);
-            }
+        if (title != null) {
+            title.setTextColor(inActiveColor);
         }
 
         if (mIsDarkTheme) {
