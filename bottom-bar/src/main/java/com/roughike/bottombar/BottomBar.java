@@ -1176,10 +1176,8 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
             BottomBarBadge oldBadge = (BottomBarBadge) mOuterContainer
                     .findViewWithTag(mBadgeMap.get(oldPosition));
 
-            if (oldBadge.getAutoShowAfterUnSelection()) {
+            if (oldBadge.getAutoShowAfterUnSelection() && oldBadge.getCount() > 0) {
                 oldBadge.show();
-            } else {
-                oldBadge.hide();
             }
         }
 
@@ -1753,13 +1751,26 @@ public class BottomBar extends RelativeLayout implements View.OnClickListener, V
             Object tag = mBadgeMap.get(tabPosition);
 
             if (tag != null) {
-                BottomBarBadge badge = (BottomBarBadge)mOuterContainer.findViewWithTag(tag);
+                BottomBarBadge badge = mOuterContainer.findViewWithTag(tag);
 
                 if (badge != null) {
                     badge.hide();
                 }
             }
         }
+    }
+
+    public BottomBarBadge getBadgeForTabAt(int tabPosition) {
+        BottomBarBadge badge = null;
+        if (hasBadgeForTabAt(tabPosition)) {
+            Object tag = mBadgeMap.get(tabPosition);
+
+            if (tag != null) {
+                badge = mOuterContainer.findViewWithTag(tag);
+            }
+        }
+
+        return badge;
     }
 
     public void setCustomDarkBackgroundColor(int backgroundColor) {

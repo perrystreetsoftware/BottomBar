@@ -21,6 +21,8 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
+
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.view.ViewCompat;
 import android.view.Gravity;
 import android.view.View;
@@ -45,12 +47,12 @@ import android.widget.TextView;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class BottomBarBadge extends TextView {
+public class BottomBarBadge extends AppCompatTextView {
     private int count;
     private boolean isVisible = false;
     private long animationDuration = 150;
     private boolean autoShowAfterUnSelection = false;
-    private boolean autoHideOnSelection = true;
+    private boolean autoHideOnSelection = false;
 
     /**
      * Set the unread / new item / whatever count for this Badge.
@@ -59,6 +61,11 @@ public class BottomBarBadge extends TextView {
      */
     public void setCount(int count) {
         this.count = count;
+        if (count > 0) {
+            this.show();
+        } else {
+            this.hide();
+        }
         setText(String.valueOf(count));
     }
 
@@ -126,6 +133,7 @@ public class BottomBarBadge extends TextView {
      * Shows the badge with a neat little scale animation.
      */
     public void show() {
+        if (count <= 0) return;
         isVisible = true;
         ViewCompat.animate(this)
                 .setDuration(animationDuration)
